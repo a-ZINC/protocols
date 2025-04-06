@@ -18,10 +18,11 @@ func New(port string) *Tcp {
 	 }
 }
 func (t *Tcp) StartServer() {
-	err := t.server.Listen(t.port, t.handleConnection)
+	err := t.server.Listen("tcp", t.port, t.handleConnection)
 	if err != nil {
 		log.Fatalf("failed to start TCP server: %v", err)
 	}
+	log.Printf("TCP server started on port %s", t.port)
 }
 
 func (t *Tcp) Dial(port string, domain string) error {
@@ -30,5 +31,5 @@ func (t *Tcp) Dial(port string, domain string) error {
 
 func (t *Tcp) handleConnection(conn net.Conn) {
 	defer conn.Close()
-	log.Printf("connection from %s", conn.RemoteAddr())
+	log.Printf("Tcp connection from %s", conn.RemoteAddr())
 }

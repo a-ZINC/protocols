@@ -1,6 +1,7 @@
 package main
 
 import (
+	"custom-protocols/protocols/http"
 	"custom-protocols/protocols/tcp"
 	"flag"
 	"fmt"
@@ -17,8 +18,10 @@ func main() {
 		switch *protocol {
 		case "tcp":
 			tcp.New(*port).StartServer()
+		case "chttp":
+			http.New(*port).StartServer()
 		default:
-			fmt.Printf("server")
+			fmt.Printf("protocol not supported")
 		}
 	case "client":
 		fmt.Printf("client")
